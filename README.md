@@ -1,24 +1,34 @@
-# ExpenseTracker
-This repository contains Dot net Web API ,Angular UI and SQL Script for "Expense Tracker".This repository  Expense tracker consists of below major modules<br/>
-<br/>(1) SignIn/SignUp <br/> (2) Monthlly Summary Dashboard <br/> (3) Add/Edit/Delete Expenses <br/> (4) Report Generation <br/>(5)Adding Expense categgory <br/>(6) Graphical view of expenses
-# How to run ?
-To run Expense Tracker below must be installed.
-<br/>(1) MSSQL Server <br/>
-(2) Visual studio <br/>
-(3) Angular<br/>
-(4)nodejs
-# Pages
- 1)Dashboard <br/>
-<img width="958" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/f50ebcfc-b078-4fd5-a232-acb16acabb91">
-<img width="958" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/fac100e2-90c3-4e7f-9c1a-a7d989a286b0">
- 2) View / Add Transaction <br/>
-<img width="959" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/c62abc4f-9c3e-436d-bcdf-55bf383cab3d">
-<img width="956" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/6d2fa40a-ab39-4bb9-ab29-6da7865899af">
-3) Settings
-<img width="955" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/418fbf92-fb05-40bb-a9bb-2f5a8b26a35c">
-<img width="960" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/9a01f08d-ab0f-4765-9c8b-58c1edfecc07">
-<img width="959" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/50ac23ae-d462-492f-8ae9-5727177e6a6d">
-<img width="958" alt="image" src="https://github.com/loganayakiAnandaraj/ExpenseTracker/assets/135302967/c8813227-5e0d-452f-b304-d4078bee038a">
+# Personal Finance Tracker
+Personal Finance Tracker is responsive web application that is designed for both desktop and mobile  with the help of github copilot in short span .This repository contains Dot net Web API ,Angular UI , SQL BAK File and screenshots for "Personal Finance Tracker".
+# Modules
+This repository  Personal Finance tracker consists of below major modules<br/>
+<br/>(1) SignIn/SignUp <br/> (2) Monthlly Summary Dashboard <br/> (3) Add/Edit/Delete Transactions <br/> (4) Export Transactions <br/>(5) Add/Delete Expense category <br/>(6) Add/Delete Recurring Transactions
+# Prerequisite 
+We have hosted our API and SQL in cloud so it is simple and easy  to run the Angular UI .
+Prerequisite to run Financa Tracker<br/>
+(1) Visual Studio Code<br/>
+(2) Node js <br/>
+(3) Angular CLI
+# How to run Angular?
+Follow below steps to run.
+(1) Open the folder  ExpenseTrackerApp inside Finance-Tracker-App in visula studio code<br/>
+(2) Inside terminal window Do "npm install"<br/>
+(3) Then do "ng serve"<br/>
+(4) Launch http://localhost:4200 in browser <br/>
+(5) SignIn Details for test user mentioned inside the project folder under helper folder<br/>
+# Project Setup in your local
+(1) create a new database "ExpenseTracker" and restore the "ExpenseTracker.BAK" file that is located in the /Database<br/>
+(2) Update the connection string in Helper(utilityHelper.cs) to point to the database you created in your local<br/>
+(3) Build<br/>
+(4) Run<br/>
+
+ 
+
+
+
+
+
+
 
 
 
