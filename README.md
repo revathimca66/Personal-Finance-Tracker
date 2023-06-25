@@ -4,13 +4,13 @@ Personal Finance Tracker is responsive web application that is designed for both
 This repository  Personal Finance tracker consists of below major modules<br/>
 <br/>(1) SignIn/SignUp <br/> (2) Monthlly Summary Dashboard <br/> (3) Add/Edit/Delete Transactions <br/> (4) Export Transactions <br/>(5) Add/Delete Expense category <br/>(6) Add/Delete Recurring Transactions
 # Prerequisite 
-We have hosted our API and SQL in cloud so it is simple and easy  to run the Angular UI .
-Prerequisite to run Financa Tracker<br/>
+We have hosted our API and SQL in cloud so it is simple and easy  to run the Angular UI .<br/>
+Prerequisite to run Financal Tracker<br/>
 (1) Visual Studio Code<br/>
 (2) Node js <br/>
 (3) Angular CLI
 # How to run Angular?
-Follow below steps to run.
+Follow below steps to run.<br/>
 (1) Open the folder  ExpenseTrackerApp inside Finance-Tracker-App in visula studio code<br/>
 (2) Inside terminal window Do "npm install"<br/>
 (3) Then do "ng serve"<br/>
