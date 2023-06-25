@@ -15,7 +15,7 @@ Follow below steps to run.
 (2) Inside terminal window Do "npm install"<br/>
 (3) Then do "ng serve"<br/>
 (4) Launch http://localhost:4200 in browser <br/>
-(5) SignIn Details for test user mentioned inside the project folder under helper folder<br/>
+(5) SignIn Details for test user mentioned in "LoginHelper.txt" file inside the Database folder <br/>
 # Project Setup in your local
 (1) create a new database "ExpenseTracker" and restore the "ExpenseTracker.BAK" file that is located in the /Database <br/>
 (2) Update the connection string in Helper(utilityHelper.cs) under Web API Project "ExpenseTracker" to point to the database you created in your local<br/>
