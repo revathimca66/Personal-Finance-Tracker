@@ -1,0 +1,205 @@
+<div class="container dashboard-container">
+    <div class="row">
+        <div class=" col-sm-12 mb-3">
+            <div class="month-calendar">
+                <div class="year"><i class="hand-ponter mt-1 fa fa-solid fa-chevron-left pull-left "
+                        (click)="prevyear(cur_year)"></i> {{cur_year}} <i
+                        class="hand-ponter mt-1 fa fa-solid fa-chevron-right pull-right"
+                        (click)="nextYear(cur_year)"></i></div>
+                <div class="col-md-12 d-none d-md-block ">
+                    <ul>
+                        <li class="months col-md-1 col-sm-2 " *ngFor="let month of month_names; let i = index"
+                            [attr.data-index]="i">
+                            <div class="month-names" [ngClass]="{'active_month': month == MonthName}"
+                                (click)="onMonthChange(i+1,month)">{{month}}</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-12  d-sm-block d-md-none ">
+                    <div ngbDropdown>
+                        <div class="month-names active_month text-center" id="gfg" ngbDropdownToggle>
+                            {{MonthName}}</div>
+                        <div ngbDropdownMenu="gfg">
+                            <button ngbDropdownItem *ngFor="let month of month_names; let i = index"
+                                [attr.data-index]="i">
+                                <div class="" (click)="onMonthChange(i+1,month)">{{month|uppercase}}</div>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row  sec-1">
+        <div class="col-lg-4 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Summary - {{MonthName }} {{year}} <span><i
+                                class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                    <div class="card-text" *ngIf="recentTransactions.length>0">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item liitem"><strong>Total Income:</strong>
+                                <span class="pull-right"> {{currency}} {{transactionsSmmary[0].amount| number: '1.2'}}</span>
+                            </li>
+                            <li class="list-group-item liitem"><strong>Total Expense:</strong>
+                                <span class="pull-right">{{currency}} {{transactionsSmmary[1].amount | number: '1.2'}}</span>
+                            </li>
+                            <li class="list-group-item liitem"><strong>Total Balance:</strong>
+                                <span class="pull-right">{{currency}} {{totalBalance | number: '1.2'}}</span>
+                            </li>
+                            <li class="list-group-item liitem"><strong>Compare to {{lastMonthName|uppercase}} {{lastyear}}:</strong>
+                                <span class="pull-right" *ngIf="arrowClass=='greenUp'">
+                                     {{percentage|  number:'1.2-2'}}% <i class="fa fa-solid fa-arrow-up text-success"></i>
+                                    </span>
+                                <span class="pull-right" *ngIf="arrowClass=='reddDown'">
+                                      {{percentage| number:'1.2-2'}} % <i class="fa fa-solid fa-arrow-down text-danger"></i>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="recentTransactions.length==0" class="text-center">
+                        <img src="assets/norecord.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Expense Breakout - {{MonthName }} {{year}} <span><i
+                                class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                    <div *ngIf="categorywiseTransactions.length>0">
+                        <plotly-plot [data]="categoryData" [layout]="categorylayout" [useResizeHandler]="true"
+                            [config]="chartConfig">
+                        </plotly-plot>
+                    </div>
+                    <div *ngIf="categorywiseTransactions.length==0" class="text-center">
+                        <img src="assets/norecord.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body pb-0">
+                    <div class="card-title">Recent Transactions - {{MonthName }} {{year}}<span><i
+                                class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                    <div *ngIf="recentTransactions.length>0">
+                        <ul><ng-container *ngFor="let item of recentTransactions ; let i = index ">
+                            <li class="p-1" *ngIf="i<5">
+                            <div class="li-Income" *ngIf="item.spending_name=='Income'">
+                                {{item.category_name}}
+                                {{currency}} {{item.amount| number: '1.2'}} on {{item.transaction_date }}</div>
+                            <div class="li-Expense" *ngIf="item.spending_name=='Expense'" >
+                                {{item.category_name}}
+                                {{currency}} {{item.amount| number: '1.2'}} on {{item.transaction_date }}</div>
+                        </li>
+                        </ng-container>
+                           
+                        </ul>
+                    </div>
+                    <div *ngIf="recentTransactions.length==0" class="text-center">
+                        <img src="assets/norecord.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row  sec-2">
+        <div class="col-lg-8 col-md-12 mb-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title"> Transactions - {{MonthName }} {{year}} <span><i
+                                    class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                        <div *ngIf="recentTransactions.length>0">
+                            <plotly-plot [data]="monthlyData" [layout]="monthlylayout" [useResizeHandler]="true"
+                                [config]="chartConfig">
+                            </plotly-plot>
+                        </div>
+                        <div *ngIf="recentTransactions.length==0" class="text-center">
+                            <img src="assets/norecord.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      
+        <div class="col-lg-4 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body pb-0">
+                    <div class="card-title"> Recurring Transactions - {{MonthName }} {{year}}<span><i
+                                class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                    <div *ngIf="upcomingEvents.length>0">
+                        <ul>
+                            <li class="p-1" *ngFor="let item of upcomingEvents">
+                                <div class="li-Income" *ngIf="item.spending_name=='Income'"> {{item.category_name}}
+                                    {{currency}} {{item.amount| number: '1.2'}}
+                                    on {{item.event_date }}-{{MonthName }}</div>
+                                <div class="li-Expense" *ngIf="item.spending_name=='Expense'"> {{item.category_name}}
+                                    {{currency}} {{item.amount| number: '1.2'}}
+                                    on {{item.event_date }}-{{MonthName }}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="upcomingEvents.length==0"><img src="assets/norecord.png"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+     <div class="row  sec-3">
+        <div class="col-lg-8 col-md-12 mb-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Weekly Income vs Weekly Expense - {{MonthName }} {{year}} <span><i
+                                    class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                        <div *ngIf="recentTransactions.length>0">
+                            <plotly-plot [data]="weeklyData" [layout]="weeklyBarlayout" [useResizeHandler]="true"
+                                [config]="chartConfig">
+                            </plotly-plot>
+                        </div>
+                        <div *ngIf="recentTransactions.length==0" class="text-center">
+                            <img src="assets/norecord.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4  col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Cash flow - {{MonthName }} {{year}} <span><i
+                                class="mt-1 pull-right fa fa-solid fa-chevron-right"></i></span></div>
+                    <div class="card-text" *ngIf="categorywiseTransactions.length>0">
+                        
+                        
+                        <div class="col-md-12 mt-3">Income  : {{currency}} {{incomeCash| number: '1.2'}}</div>
+                        <div class="progress mt-3">
+                            
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [style.width.%]="incomePercent" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="col-md-12 mt-3">Expense  : {{currency}} {{expenseCash| number: '1.2'}}</div>
+                        <div class="progress mt-3">
+                            
+                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar"
+                            [style.width.%]="expensePercent" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="categorywiseTransactions.length==0" class="text-center">
+                        <img src="assets/norecord.png">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> 
+</div>

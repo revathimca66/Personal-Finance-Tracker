@@ -1,0 +1,64 @@
+<div class="lt-alert lt-success">
+  <div class="lt-alert-messgae ">
+     hh
+  </div>
+</div>
+<div class="lt-alert lt-error">
+  <div class="lt-alert-messgae ">
+     hhh
+  </div>
+</div>
+<div class="sidenav d-xs-none d-md-block" *ngIf="menuId != 0">
+  <ul class="menus">
+    <li class="li-menus" [ngClass]="{'active-menu': menuId == 1}">
+      <div><a class="hand-ponter" (click)="navigateto(1)"><i class="fa fa-solid fa-home" title="Dashboard"></i></a>
+      </div>
+
+    </li>
+    <li class="li-menus" [ngClass]="{'active-menu': menuId == 2}">
+      <div><a class="hand-ponter" (click)="navigateto(2)"><i class="fa fa-solid fa-money"
+            title="View Transaction"></i></a></div>
+
+    </li>
+
+    <li class="li-menus" [ngClass]="{'active-menu': menuId == 3}">
+      <div><a  class="hand-ponter" (click)="navigateto(3)"><i class="fa fa-solid fa-gear" title="Setting"></i></a></div>
+
+    </li>
+
+    <li class="li-menus logout" [ngClass]="{'active-menu': menuId == 4}">
+      <div><a class="hand-ponter" (click)="navigateto(4)"><i class="fa fa-solid fa-power-off" title="Logout"></i></a></div>
+    </li>
+  </ul>
+</div>
+<div class="mobile-menu d-xs-block d-md-none" *ngIf="menuId != 0">
+  <ul>
+    <li class="mobile-li-menu">
+      <a (click)="navigateto(1)"><i class="fa fa-solid fa-home" title="Dashboard"></i></a>
+
+    </li>
+    <li class="mobile-li-menu">
+      <a (click)="navigateto(2)"><i class="fa fa-solid fa-money" title="View Transaction"></i></a>
+    </li>
+    <li class="mobile-li-menu">
+      <a (click)="navigateto(3)"><i class="fa fa-solid fa-gear" title="Setting"></i></a>
+    </li>
+    <li class="mobile-li-menu">
+      <a (click)="navigateto(4)"><i class="fa fa-solid fa-power-off" title="Logout"></i></a>
+    </li>
+  </ul>
+</div>
+<div class="container-fluid " *ngIf="menuId != 0">
+  <div class="main">
+    <!-- <router-outlet></router-outlet> -->
+    <div *ngIf="menuId==1">
+      <app-dashboard></app-dashboard>
+    </div>
+    <div *ngIf="menuId==2">
+      <app-viewtransactions></app-viewtransactions>
+    </div>
+    <div *ngIf="menuId==3">
+      <app-settings></app-settings>
+    </div>
+  </div>
+</div>

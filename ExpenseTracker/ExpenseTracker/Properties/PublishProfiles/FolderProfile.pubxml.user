@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\projects\Publish</_PublishTargetUrl>
+    <History>True|2023-06-24T12:33:33.0726706Z;True|2023-06-24T18:02:57.6660957+05:30;True|2023-06-24T17:27:26.3780086+05:30;True|2023-06-24T13:00:10.6476882+05:30;True|2023-06-21T11:27:55.5396603+05:30;True|2023-06-20T17:25:31.4263331+05:30;True|2023-06-20T16:45:25.0382838+05:30;</History>
+  </PropertyGroup>
+</Project>

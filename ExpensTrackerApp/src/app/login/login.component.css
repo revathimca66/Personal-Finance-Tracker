@@ -1,0 +1,54 @@
+.login-container {
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to right bottom, #6c3780, #8212c3);
+  margin:  30px auto;
+  width: 100% !important;
+  padding :2px 30px 0px 10px
+}
+
+.entry{
+  background-color: #fff;
+  border-radius: 0.5rem;
+  min-height:495px;
+  margin:20px 10px;
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../../assets/img/login_banner.png);
+  background-size: 100%;
+  padding:3rem;
+}
+.entry-form{
+  padding:1rem;
+}
+.heading-tertiary {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6c3780;
+}
+
+@media only screen and (max-width: 75em) {
+  .entry {
+      background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 65%, transparent 65%), url(../../assets/img/login_banner.jpg);
+      background-size: cover;
+     
+  }
+  .entry-form{
+    padding:2rem;
+  }
+}
+.label-info {
+  font-size: 10px;
+  color: #a5a0a0;
+}
+@media only screen and (max-width: 56.25em) {
+  .entry {
+      background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.9)), to(rgba(255, 255, 255, 0.9))), url(../../assets/img/login_banner.jpg);
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../../assets/img/login_banner.jpg);
+      padding:2rem;
+      background-size: cover;
+    }
+    .entry-form{
+      padding:1rem;
+    }
+}
+
+

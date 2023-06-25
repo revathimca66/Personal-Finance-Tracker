@@ -1,0 +1,233 @@
+<div class="container setting-container">
+    <div class="cus-tabs row ">
+        <div class="col-sm-4 tab-item" (click)="tabChange(1)" [ngClass]="{'active-tab': tabid == 1}">Profile
+
+        </div>
+        <div class="col-sm-4 tab-item" (click)="tabChange(2)" [ngClass]="{'active-tab': tabid == 2}">Categories
+
+        </div>
+        <div class="col-sm-4 tab-item" (click)="tabChange(3)" [ngClass]="{'active-tab': tabid == 3}">Recurring
+            Transactions
+
+        </div>
+
+    </div>
+    <div class="row">
+        <!-- Profile-->
+        <div class="col-md-12" *ngIf="tabid==1">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Profile Details </div>
+                    <div class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item liitem"><strong>Name:</strong>
+                                <span class="m-3"> {{this.userInfo.full_name}}</span>
+                            </li>
+                            <li class="list-group-item liitem"><strong>Email:</strong>
+                                <span class="m-3"> {{this.userInfo.email_id}}</span>
+                            </li>
+                            <li class="list-group-item liitem"><strong >Denomination:</strong>
+                                <span class="m-3">{{this.userInfo.currency}}</span>
+                                
+                                <span class="action m-1 hand-ponter" *ngIf="!showEdit" (click)="editDenomination()"><i
+                                        class="fa fa-solid fa-edit"></i></span>
+
+                            </li>
+                            <li class="list-group-item liitem " *ngIf="showEdit">
+                                <strong>
+                                    <input type="text" [(ngModel)]="currency" class="w-25 form-control" id="currency"
+                                        placeholder="Enter denomination">
+                                </strong>
+                                <span class="">
+                                    <button type="button" [disabled]="currency==null" class="btn btn-submit m-3 btn-sm" (click)="changedenomination()">Save
+                                    </button>
+                                    <button type="button" class="btn btn-cancel m-3 btn-sm" (click)="canceldenomination()">Cancel
+                                        </button>
+                               
+                                    </span>
+
+                            </li>
+                            <!-- <li class="list-group-item liitem">
+                                <button type="button" class="btn-sm btn btn-danger mt-3 " (click)="deactivate()">Deactivate
+                                    Account</button>
+                            </li> -->
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Categories -->
+        <div class="col-md-12" *ngIf="tabid==2">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Transaction Categories <a title="Add Category "
+                            (click)="open(categorymodal)" class="pull-right add"><i class="fa fa-solid fa-plus"
+                                title="Add Transaction"></i></a></div>
+                    <div class="card-text" *ngIf="categories.length>0">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction Type</th>
+                                    <th>Category</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of categories">
+                                    <td [ngClass]="item.category_type">{{item.category_type}}</td>
+                                    <td>{{item.category_name}}</td>
+                                    <td><span class="hand-ponter" (click)="deletecategory(item.category_id)"><i
+                                                class="fa fa fa-trash-o"></i></span></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div *ngIf="categories.length==0" class="text-center">
+                        <img src="assets/norecord.png">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- REcurring tra -->
+        <div class="col-md-12" *ngIf="tabid==3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Recurring Transactions <a title="Add Recurring Transactions "
+                            (click)="open(eventmodal)" class="pull-right add"><i class="fa fa-solid fa-plus"
+                                title="Add Transaction"></i></a></div>
+
+                    <ngb-accordion>
+                        <ngb-panel *ngFor="let data of recurringList">
+                            <ng-template ngbPanelTitle>
+                                {{data.occursOn}}
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <div class="card-text">
+                                    <table class="table" *ngIf="data.list.length>0">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Transaction Date</th>
+                                                <th>Amount</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of data.list">
+
+                                                <td [ngClass]="item.spending_name">{{item.category_name}}</td>
+                                                <td>{{item.event_date| date:"dd-MMM"}}</td>
+                                                <td>{{item.currency}} {{item.amount| number: '1.2'}}</td>
+                                                <td><span class="hand-ponter"
+                                                        (click)="deleteRecurringEvent(item.event_id)"><i
+                                                            class="fa fa fa-trash-o"></i></span></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-template>
+                        </ngb-panel>
+
+                    </ngb-accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #eventmodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Recurring Transaction</h4>
+        <button type="button" class="close" aria-label="Close" (click)="clearEventform()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="eventForm" autocomplete="false">
+            <div class="row m-3">
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlInput1" class="mb-3">Transaction Date</label>
+                    <input type="date" class="form-control" id="Date" placeholder="Select Date"
+                        formControlName="transactionDate">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlSelect1" class="mb-3">Category</label>
+                    <select class="form-control" id="exampleFormControlSelect1" formControlName="transactionCategory">
+                        <option *ngFor="let item of categories" (value)="item.category_id">{{item.category_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlInput1" class="mb-3">Amount</label>
+                    <input type="number" class="form-control" id="amount" placeholder="Enter Amount"
+                        formControlName="transactionAmount">
+
+                </div>
+
+                <div class="form-group col-md-4 mt-3">
+                    <label for="exampleFormControlInput1" class="mb-3"> Select Recurring Type </label>
+                    <select class="form-control" id="exampleFormControlSelect1" formControlName="duration">
+                        <option>Daily</option>
+                        <option>Monthly</option>
+                        <option>Yearly</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-group pull-right mt-3">
+                <button type="button" class="btn btn-submit m-3 btn-sm" (click)="addEvent()"
+                    [disabled]="!eventForm.valid">Save </button>
+                <button type="button" class="btn btn-cancel btn-sm" (click)="clearEventform()">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>
+<ng-template #categorymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="clearcategoryForm()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="categoryForm" autocomplete="false">
+            <div class="row m-3">
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlInput1" class="mb-3">Select Transaction Type</label>
+                    <select class="form-control" id="exampleFormControlSelect1" formControlName="transactionCategory">
+                        <option>Income</option>
+                        <option>Expense</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleFormControlInput1" class="mb-3">Category</label>
+                    <input type="text" class="form-control" id="Date" placeholder="Enter Category"
+                        formControlName="categoryName">
+                </div>
+
+
+            </div>
+
+            <div class="form-group pull-right mt-3">
+                <button type="button" class="btn btn-submit btn-sm m-3" (click)="addCategory()"
+                    [disabled]="!categoryForm.valid">Save</button>
+                <button type="button" class="btn btn-cancel btn-sm" (click)="clearcategoryForm()">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>

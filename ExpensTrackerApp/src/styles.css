@@ -1,0 +1,368 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  font-size:13px !important;
+}
+ul{
+    list-style-type:none;
+    padding-left:0px !important;
+}
+.hand-ponter{
+  cursor:pointer;
+}
+.container{
+  height: 89vh;
+    overflow: auto;
+}
+thead {
+  text-transform: uppercase;
+}
+table{
+  border-collapse: separate !important;
+  border-spacing: 0px 5px !important;
+}
+
+/* start sidenav */
+.sidenav {
+    height: 96%;
+    width: 75px;
+    position: fixed;
+    z-index: 1;
+    top: 10px;
+    bottom:10px;
+    left: 10px;
+    background-color: #6c3780;
+    overflow-x: hidden;
+    border-radius: 20px;
+    padding: 10px;
+    color:#fff;
+    text-align: center;
+    
+  }
+  .sidenav li i{
+    font-size:25px;
+  }
+  .sidenav li{
+    padding:15px;
+  }
+  .sidenav li
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    
+  }
+  
+  .sidenav a:hover {
+    color: #fff;
+    
+  }
+  
+  .main {
+    margin: 1rem 0rem 1rem 6rem;  /* Same as the width of the sidenav */
+    background-color:rgb(189 173 230 / 25%);
+    padding: 15px 0px 15px 0px;
+    border-radius:10px;
+  }
+  .logout{
+    position: absolute;
+    bottom: 0;
+    left: 13px;
+  }
+  .active-menu{
+    background-color: #fff;
+    border-radius: 10px;
+   
+  }
+
+  .li-menus a{
+    color:#fff;
+  }
+  .active-menu a,.active-menu a:hover{
+    color:#6c3780;
+  }
+  /* end sidenav */
+/*mobile menu*/
+.mobile-menu{
+  background-color: #6c3780;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.mobile-menu ul{
+  display: inline-flex;
+}
+.mobile-menu ul li{
+  padding:5px 38px 5px 38px;
+    font-size: 20px;
+}
+/* start dashboard calendar */
+.month-calendar ul li{
+    display: inline-block;
+    text-align: center;
+}
+
+.month-calendar .year{
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    background-color: #6c3780;
+    color:#fff;
+    font-weight: bold;
+}
+.month-calendar ul{
+    padding: 0px;
+    margin: 5px;
+    border-radius: 5px;
+   
+}
+.month-names{
+    cursor: pointer;
+    border: 1px solid #6c3780;
+    background-color: rgb(189 173 230 / 25%);
+    text-transform: uppercase;
+    padding:5px;
+    margin:2px;
+}
+.active_month{
+    background-color: #fff;
+    color: #6c3780;
+    font-weight: bold;
+}
+/* end calendar */
+/* end scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #6c3780; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6c3780; 
+  }
+/* end scrollbar */
+.card-title{
+    padding: 10px;
+background-color:rgb(189 173 230 / 25%);
+/* border: 2px solid #6c3780; */
+border-bottom-right-radius: 10px;
+text-transform: uppercase;
+font-weight: bold;
+color:#6c3780 !important;
+
+}
+.dashboard-container .sec-1 .card-body{
+  min-height:265px  ;
+}
+.dashboard-container .sec-2 .card-body,.dashboard-container .sec-3 .card-body{
+    min-height:350px  ;
+    overflow-y: auto;;
+  }
+  .li-Income,.Income{
+    padding:5px;
+    border-left:4px solid #228022 ;
+    border-radius: 4px;
+  }
+  .li-Expense,.Expense{
+    padding:5px;
+    border-left:4px solid #FF6961 ;
+    border-radius: 4px;
+  }
+
+.dropdown-menu.show{
+    width:100%;
+    height:200px;
+    overflow-y: auto;
+}
+.dropdown-toggle::after {
+  display:none !important;
+}
+/* Tab*/
+.cus-tabs{
+  margin: 5px;
+ padding:0px 12px;
+}
+.text-app{
+  color:#6c3780;
+}
+.tab-item{
+  background-color:rgb(189 173 230 / 25%);
+  padding: 3px;
+  text-align: center;
+  color: black;
+  text-transform: uppercase;
+  border:1px solid #6c3780;
+  cursor: pointer;
+  color: #6c3780;
+  font-weight: bold;
+}
+.active-tab{
+  background-color:#6c3780;
+  color: #fff;
+}
+.btn-cancel{
+  background-color: #fff !important;
+border: 1px solid black !important;
+}
+.btn-submit{
+  background-color: #6c3780 !important;
+  color: #fff !important;
+}
+.modal-header{
+  background-color: rgb(189 173 230 / 25%);
+    color: #6c3780;
+}
+/* Slider*/
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #6c3780;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #6c3780;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.add{
+  background-color: #6c3780;
+  border-radius: 50%;
+  width: 23px;
+  color: #fff;
+  padding: 2px 6px;
+  margin-left:15px;
+  cursor: pointer;
+}
+.action{
+  color: #fff;
+    background-color: #6c3780;
+    padding: 5px
+}
+
+.card-text{
+  overflow-x: auto;
+  width:100%;
+}
+.form-control:focus{
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1) !important;
+}
+input:focus,select:focus{
+  border-bottom:2px solid #ad5bcb !important;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+input,select{
+border:none !important;
+border-bottom:2px solid #6c3780 !important;
+border-radius:0px !important;
+font-size: 16px !important;
+box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+::-webkit-input-placeholder { /* Edge */
+  color: #ad5bcb !important;
+  font-size:13px !important;
+  text-transform: uppercase;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:  #ad5bcb !important;
+  font-size:13px !important;
+  text-transform: uppercase;
+}
+
+::placeholder {
+  color:  #ad5bcb !important;
+  font-size:13px !important;
+  text-transform: uppercase;
+}
+.accordion-button{
+  font-size: 13px !important;
+}
+.progress{
+  background-color: #dfd8f4  !important;
+}
+.progress-bar-striped.bg-danger {
+  background-color: #FF6961 !important;
+}
+.progress-bar-striped.bg-success {
+  background-color: #228022 !important;
+}
+.toast {
+  opacity: 1 !important;
+}
+/* Bar chart */
+g.barlayer g.trace.bars path {
+  clip-path: inset(0px 20% -5px 20% round 10px);
+}
+/* Bar Chart */
+@media only screen and (max-width: 600px) {
+  .main {
+   margin:0px;
+  }
+  .sidenav{
+    display: none;
+  }
+}
+

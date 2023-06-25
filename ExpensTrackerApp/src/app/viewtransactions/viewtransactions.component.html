@@ -1,0 +1,197 @@
+<div class="container transaction-container">
+  <div class="row">
+    <div class=" col-sm-12 mb-3">
+      <div class="month-calendar">
+        <div class="year"><i class="hand-ponter mt-1 fa fa-solid fa-chevron-left pull-left "
+            (click)="prevyear(cur_year)"></i> {{cur_year}} <i
+            class="hand-ponter mt-1 fa fa-solid fa-chevron-right pull-right" (click)="nextYear(cur_year)"></i></div>
+        <div class="col-md-12 d-none d-md-block ">
+          <ul>
+            <li class="months col-md-1 col-sm-2 " *ngFor="let month of month_names; let i = index"
+              [attr.data-index]="i">
+              <div class="month-names" [ngClass]="{'active_month': month == MonthName}"
+                (click)="onMonthChange(i+1,month)">{{month}}</div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12  d-sm-block d-md-none ">
+          <div ngbDropdown>
+            <div class="month-names active_month text-center" id="gfg" ngbDropdownToggle>
+              {{MonthName}}</div>
+            <div ngbDropdownMenu="gfg">
+              <button ngbDropdownItem *ngFor="let month of month_names; let i = index" [attr.data-index]="i">
+                <div class="" (click)="onMonthChange(i+1,month)">{{month|uppercase}}</div>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">Transactions - {{MonthName }} {{year}}
+
+
+            <a title="Add Transaction " (click)="open(mymodal)" class="pull-right add"><i
+                class="fa fa-solid fa-plus"></i></a><span class="hand-ponter pull-right"
+              *ngIf="transactionsDetails.length>0" (click)="export()"><i class="fa fa-solid fa-download"></i> Export
+            </span>
+          </div>
+          <div class="card-text" *ngIf="transactionsDetails.length>0">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Transaction Type</th>
+                  <th>Category</th>
+                  <th>Transaction Date</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of transactionsDetails">
+                  <td [ngClass]="item.spending_name">{{item.spending_name}}</td>
+                  <td>{{item.category_name}}</td>
+                  <td>{{item.transaction_date}}</td>
+                  <td>{{item.currency}} {{item.amount | number: '1.2'}}</td>
+                  <td>
+                    <span class="hand-ponter ml-2" title="Edit Transaction " (click)="Edit(item,editmodal)" ><i
+                      class="fa fa-solid fa-pencil"></i></span>
+                    <span class="hand-ponter pull-right" title="Delete Transaction " (click)="deleteTransaction(item.transaction_id)"><i
+                        class="fa fa fa-trash-o"></i></span>
+                    
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="transactionsDetails.length==0" class="text-center">
+            <img src="assets/norecord.png">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Transaction</h4>
+      <button type="button" class="close" aria-label="Close" (click)="cleartransactionForm()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="cus-tabs row">
+        <div class="col-sm-6 tab-item " (click)="tabChange(1)" [ngClass]="{'active-tab': tabid == 1}">Income</div>
+        <div class="col-sm-6 tab-item" (click)="tabChange(2)" [ngClass]="{'active-tab': tabid == 2}">Expense</div>
+      </div>
+
+      <form [formGroup]="transactionForm" autocomplete="false">
+        <div class="row m-3">
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlInput1" class="mb-3">Transaction Date</label>
+            <input type="date" class="form-control" id="Date" placeholder="Select Date"
+              formControlName="transactionDate">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlSelect1" class="mb-3">Category</label>
+            <select class="form-control" (change)="categoryChange()" id="exampleFormControlSelect1"
+              formControlName="transactionCategory">
+              <option *ngFor="let item of categoryList"  [ngValue]="item.category_name">{{item.category_name}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlInput1" class="mb-3">Amount</label>
+            <input type="number" class="form-control" id="amount" placeholder="Enter Amount"
+              formControlName="transactionAmount">
+          </div>
+        </div>
+        <div class="row m-3">
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlInput1" class="mb-3"> Mark as Recurring Transaction </label>
+
+            <label class="switch">
+              <input type="checkbox" (change)="recurringChange()" formControlName="recurringEvent">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+
+
+          <div class="form-group col-md-4" *ngIf="recurringFlag">
+            <label for="exampleFormControlInput1" class="mb-3"> Select Recurring Type </label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="duration">
+              <option>Daily</option>
+              <option>Monthly</option>
+              <option>Yearly</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="form-group pull-right mt-3">
+
+          <button type="button" class="btn btn-submit m-3 btn-sm" (click)="addTransaction()"
+            [disabled]="!transactionForm.valid">Save</button>
+          <button type="button" class="btn btn-cancel btn-sm" (click)="cleartransactionForm()">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+
+  </ng-template>
+  <ng-template #editmodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Transaction</h4>
+      <button type="button" class="close" aria-label="Close" (click)="clearEdittransactionForm()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="cus-tabs row">
+        <div class="col-sm-6 tab-item " (click)="tabChange(1)" [ngClass]="{'active-tab': tabid == 1}">Income</div>
+        <div class="col-sm-6 tab-item" (click)="tabChange(2)" [ngClass]="{'active-tab': tabid == 2}">Expense</div>
+      </div>
+
+      <form [formGroup]="transactionEditForm" autocomplete="false">
+        <div class="row m-3">
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlInput1" class="mb-3">Transaction Date</label>
+            <input type="date" class="form-control" id="Date" placeholder="Select Date"
+              formControlName="transactionDate">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlSelect1" class="mb-3">Category</label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="transactionCategory">
+              <option *ngFor="let item of categoryList" [ngValue]="item.category_name">{{item.category_name}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="exampleFormControlInput1" class="mb-3">Amount</label>
+            <input type="number" class="form-control" id="amount" placeholder="Enter Amount"
+              formControlName="transactionAmount">
+          </div>
+        </div>
+
+
+        <div class="form-group pull-right mt-3">
+
+          <button type="button" class="btn btn-submit m-3 btn-sm" (click)="SaveEditTransaction()"
+            [disabled]="!transactionEditForm.valid">Save</button>
+          <button type="button" class="btn btn-cancel btn-sm" (click)="clearEdittransactionForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
